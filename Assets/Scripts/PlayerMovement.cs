@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,8 +12,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float _wallJumpCooldown;
     private float _horizontalInput;
-    
-    
 
     private void Awake()
     {
@@ -33,7 +30,15 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("isGrounded", isGrounded());
 
         WallJump(_horizontalInput);
+        Dodge();
 
+    }
+
+    private void Dodge()
+    {
+        if (!isOnWall() && Input.GetMouseButtonDown(1))
+            _animator.SetTrigger("Dodge");
+        //ToDo: make player immune to damage
     }
 
     private void WallJump(float horizontalInput)
@@ -103,4 +108,5 @@ public class PlayerMovement : MonoBehaviour
             0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit2D.collider != null;
     }
+    
 }
