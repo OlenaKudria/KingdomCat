@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
         {
-            if (isGrounded())
+            if (isGrounded() || isOnWallBox())
             {
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
                 _animator.SetTrigger("Jump");
@@ -95,14 +95,21 @@ public class PlayerMovement : MonoBehaviour
     }
     
 
-    private bool isGrounded()
+    public bool isGrounded()
     {
         RaycastHit2D raycastHit2D = Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size,
             0, Vector2.down, 0.1f, groundLayer);
         return raycastHit2D.collider != null;
     }
-    
-    private bool isOnWall()
+
+    public bool isOnWallBox()
+    {
+        RaycastHit2D raycastHit2D = Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size,
+            0, Vector2.down, 0.1f, wallLayer);
+        return raycastHit2D.collider != null;
+    }
+
+    public bool isOnWall()
     {
         RaycastHit2D raycastHit2D = Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size,
             0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
