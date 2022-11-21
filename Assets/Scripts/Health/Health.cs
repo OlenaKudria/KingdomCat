@@ -57,7 +57,7 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private IEnumerator Invunerability()
+    public IEnumerator Invunerability()
     {
         Physics2D.IgnoreLayerCollision(18, 17, true);
         for (int i = 0; i < numberOfFlashes; i++)

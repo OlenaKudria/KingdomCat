@@ -9,14 +9,17 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private BoxCollider2D _boxCollider2D;
+    private Health _health;
     private float _wallJumpCooldown;
     private float _horizontalInput;
+    private float _dodgeCooldown;
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _boxCollider2D = GetComponent<BoxCollider2D>();
+        _health = GetComponent<Health>();
     }
     
     private void Update()
@@ -35,9 +38,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dodge()
     {
-        if (!isOnWall() && Input.GetMouseButtonDown(1))
-            _animator.SetTrigger("Dodge");
-        //ToDo: make player immune to damage
+        if (_dodgeCooldown > 1)
+        {
+            if (!isOnWall() && Input.GetMouseButtonDown(1))
+            {
+                _animator.SetTrigger("Dodge");
+                StartCoroutine(_health.Invunerability());
+                _dodgeCooldown = 0;
+            }
+        }
+        else
+            _dodgeCooldown += Time.deltaTime;
     }
 
     private void WallJump(float horizontalInput)
