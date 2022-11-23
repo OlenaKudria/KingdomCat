@@ -43,7 +43,6 @@ public class PlayerAttack : MonoBehaviour
       {
          enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
       }
-
    }
    
    private void OnDrawGizmosSelected()

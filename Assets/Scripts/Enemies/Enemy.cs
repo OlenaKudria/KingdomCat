@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 100;
     private int _currenthealth;
 
+    [SerializeField]private Behaviour[] _components;
+
     void Start()
     {
         _currenthealth = maxHealth;
@@ -26,8 +28,9 @@ public class Enemy : MonoBehaviour
     
     IEnumerator Die(){
         animator.SetBool("isDead", true);
-        yield return new WaitForSeconds(2); 
-        Destroy(gameObject);
+        yield return new WaitForSeconds(2);
+        foreach (Behaviour component in _components)
+            component.enabled = false;
+        gameObject.SetActive(false);
     }
-    
 }

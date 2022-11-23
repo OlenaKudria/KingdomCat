@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private float jumpForce;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private LayerMask enemyLayer;
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private BoxCollider2D _boxCollider2D;
@@ -74,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
         {
-            if (isGrounded() || isOnWallBox())
+            if (isGrounded() || isOnWallBox() || isOnEnemy())
             {
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
                 _animator.SetTrigger("Jump");
@@ -123,6 +124,13 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D raycastHit2D = Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size,
             0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
+        return raycastHit2D.collider != null;
+    }
+    
+    public bool isOnEnemy()
+    {
+        RaycastHit2D raycastHit2D = Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size,
+            0, Vector2.down, 0.1f, enemyLayer);
         return raycastHit2D.collider != null;
     }
     

@@ -45,16 +45,10 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + value, 0, startingHealth);
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.E))
-            TakeDamage(1);
-    }
-
     private IEnumerator Die(){
         _animator.SetTrigger("Die");
         yield return new WaitForSeconds(2); 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public IEnumerator Invunerability()
