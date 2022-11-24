@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 1050419322, guid: bdfedc866aebdab478d5a416a5188e9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -147,3 +147,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   animator: {fileID: 1860949283959923288}
+  trapSound: {fileID: 8300000, guid: af34333a8072a9a40aa57689ec18b7df, type: 3}

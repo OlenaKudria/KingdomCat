@@ -2,18 +2,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement pars")]
     [SerializeField]private float speed;
     [SerializeField]private float jumpForce;
+    private float _horizontalInput;
+    [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask enemyLayer;
+    [Header("Monos")]
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private BoxCollider2D _boxCollider2D;
     private Health _health;
+    [Header("Cooldown")]
     private float _wallJumpCooldown;
-    private float _horizontalInput;
     private float _dodgeCooldown;
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip playerJumpSound;
+    [SerializeField] private AudioClip playerDodgeSound;
 
     private void Awake()
     {
@@ -44,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
             if (!isOnWall() && Input.GetMouseButtonDown(1))
             {
                 _animator.SetTrigger("Dodge");
+                SoundManager.instance.PlaySound(playerDodgeSound);
                 StartCoroutine(_health.Invunerability());
                 _dodgeCooldown = 0;
             }
@@ -65,9 +73,14 @@ public class PlayerMovement : MonoBehaviour
             }
             else
                 _rigidbody2D.gravityScale = 2.5f;
-            
+
             if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
+            {
                 Jump();
+                if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
+                  SoundManager.instance.PlaySound(playerJumpSound);
+            }
+            
         }
         else
             _wallJumpCooldown += Time.deltaTime;

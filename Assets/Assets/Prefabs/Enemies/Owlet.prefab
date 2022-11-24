@@ -157,6 +157,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 262144
+  enemyAttackSound: {fileID: 8300000, guid: b139e634fb352a549802389b335e9fe5, type: 3}
 --- !u!114 &9154679297731917684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +175,8 @@ MonoBehaviour:
   _components:
   - {fileID: 8137147474758581317}
   - {fileID: 0}
+  deathSound: {fileID: 8300000, guid: d3bd7ab032c78624885b2a462a752333, type: 3}
+  hurtSound: {fileID: 8300000, guid: 461c3cf3e2ee04443b639f65d2941cd9, type: 3}
 --- !u!95 &2652864092584242288
 Animator:
   serializedVersion: 4

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - ShooterTrap
+  - ArrowTrap
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
