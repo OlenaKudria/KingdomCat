@@ -16,6 +16,7 @@ public class EnemyAttack : MonoBehaviour
    private Animator _animator;
    private Health _playerHealth;
    private EnemyPatrol _enemyPatrol;
+   [SerializeField] private AudioClip enemyAttackSound;
 
    private void Awake()
    {
@@ -31,6 +32,7 @@ public class EnemyAttack : MonoBehaviour
          if (_cooldownTimer >= attackCooldown)
          {
             _cooldownTimer = 0;
+            SoundManager.instance.PlaySound(enemyAttackSound);
             _animator.SetTrigger("Attack");
          }
       }

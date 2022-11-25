@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 05d188c8fc2919549a318a0e7cc3069e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -174,6 +174,8 @@ MonoBehaviour:
   _components:
   - {fileID: 6238441998845781198}
   - {fileID: 0}
+  deathSound: {fileID: 8300000, guid: d3bd7ab032c78624885b2a462a752333, type: 3}
+  hurtSound: {fileID: 8300000, guid: 461c3cf3e2ee04443b639f65d2941cd9, type: 3}
 --- !u!114 &6238441998845781198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +196,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 262144
+  enemyAttackSound: {fileID: 8300000, guid: f5bc562f5f2e4bd44911a56009e5e886, type: 3}
 --- !u!61 &7199569209298577772
 BoxCollider2D:
   m_ObjectHideFlags: 0

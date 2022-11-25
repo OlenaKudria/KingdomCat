@@ -14,6 +14,8 @@ public class Health : MonoBehaviour
     [Header("iFrames")]
     [SerializeField] private float iFramesDuration;
     [SerializeField] private float numberOfFlashes;
+    [SerializeField] private AudioClip playerDeathSound;
+    [SerializeField] private AudioClip playerHurtSound;
 
     private void Awake()
     {
@@ -28,13 +30,16 @@ public class Health : MonoBehaviour
         if (currentHealth > 0)
         {
             _animator.SetTrigger("TakeDamage");
+            SoundManager.instance.PlaySound(playerHurtSound);
             StartCoroutine(Invunerability());
         }
         else
         {
             if (_dead) return;
             _animator.SetTrigger("Die");
+            SoundManager.instance.PlaySound(playerDeathSound);
             GetComponent<PlayerMovement>().enabled = false;
+            GetComponent<PlayerAttack>().enabled = false;
             StartCoroutine(Die());
             _dead = true;
         }
@@ -45,10 +50,21 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + value, 0, startingHealth);
     }
 
+    public void Respawn()
+    {
+        _dead = false;
+        AddHealth(startingHealth);
+        _animator.ResetTrigger("Die");
+        _animator.Play("Knight_Idle");
+        StartCoroutine(Invunerability());
+        GetComponent<PlayerMovement>().enabled = true;
+        GetComponent<PlayerAttack>().enabled = true;
+
+    }
+
     private IEnumerator Die(){
         _animator.SetTrigger("Die");
-        yield return new WaitForSeconds(2); 
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds(2);
     }
 
     public IEnumerator Invunerability()
